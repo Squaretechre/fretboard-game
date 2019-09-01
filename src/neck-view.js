@@ -1,4 +1,4 @@
-const neckView = (element, model, buttonHandler) => {
+const neckView = (element, model, scoreAnswer) => {
   const update = () => {
     const html = `<div class="neck">
     <div class="neck__fret">
@@ -70,10 +70,11 @@ const neckView = (element, model, buttonHandler) => {
     </div>`;
 
     element.innerHTML = html;
+
     const buttons = Array.from(document.getElementsByClassName("neck__button"));
+
     buttons.forEach(button =>
       button.addEventListener("click", event => {
-        // const noteLabel = event.target.children.item(0);
         const note = button.getAttribute("data-note");
         const noteLabel = document.createElement("span");
         noteLabel.textContent = note;
@@ -90,7 +91,10 @@ const neckView = (element, model, buttonHandler) => {
 
         button.appendChild(noteLabel);
 
-        buttonHandler(event);
+        const answer = event.target.getAttribute("data-note");
+        const octave = event.target.getAttribute("data-octave");
+
+        scoreAnswer(answer, octave);
       })
     );
   };

@@ -18,9 +18,11 @@ const GameModel = () => {
   const scoreAnswer = answer => {
     if (answer === currentNoteBeingGuessed) correctAnswers += 1;
     if (answer !== currentNoteBeingGuessed) incorrectAnswers += 1;
-    currentNoteBeingGuessed = notes[randomIndex()];
+    currentNoteBeingGuessed = randomNote();
     observable.notify();
   };
+
+  const randomNote = () => notes[randomIndex()];
 
   const randomIndex = () => {
     return Math.floor(Math.random() * Math.floor(notes.length - 1));
