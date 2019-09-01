@@ -6,7 +6,7 @@
 
   @include for-size(tablet-portrait-up) {
     padding-top: 0px;
- }
+  }
 }
 
 .neck__fret {
@@ -33,7 +33,7 @@
 
   @include for-size(tablet-portrait-up) {
     height: 40px;
- }
+  }
 }
 
 .neck__button:hover {
@@ -50,7 +50,11 @@
   top: 50%;
   left: 50%;
   font-family: "Space Mono", monospace;
-  font-size: 20px;
+  font-size: 16px;
   color: #ffffff;
   transform: translate(-50%, -50%);
+
+  @include for-size(tablet-portrait-up) {
+    font-size: 20px;
+  }
 }
