@@ -1,11 +1,27 @@
 .score {
-  margin-bottom: 24px;
+  display: flex;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  padding: 12px 0px;
   text-align: center;
-  font-size: 20px;
+  background-color: $color-white;
+
+  @include for-size(tablet-portrait-up) {
+    position: initial;
+    margin-bottom: 12px;
+    padding: 24px 0px;
+    font-size: 20px;
+ }
 }
 
 .score__find-label {
+  flex: 1;
   font-weight: 600;
+
+  @include for-size(tablet-portrait-up) {
+    display: inline-block;
+ }
 }
 
 .score__icon {
@@ -22,6 +38,7 @@
 
 .score__answer-totals {
   display: flex;
+  flex: 1;
 }
 
 .score__answer-totals-col {

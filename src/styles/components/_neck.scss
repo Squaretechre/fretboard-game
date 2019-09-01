@@ -1,5 +1,12 @@
 .neck {
   text-align: center;
+  
+  // push neck down by height of score which is position: fixed
+  padding-top: 42px;
+
+  @include for-size(tablet-portrait-up) {
+    padding-top: 0px;
+ }
 }
 
 .neck__fret {
@@ -17,12 +24,16 @@
 
 .neck__button {
   position: relative;
-  height: 40px;
-  width: 80%;
+  height: 20px;
+  width: 60%;
   border-radius: 20px;
   border: 0;
   background-color: $color-neck-button;
   transition: all .2s;
+
+  @include for-size(tablet-portrait-up) {
+    height: 40px;
+ }
 }
 
 .neck__button:hover {
