@@ -1,4 +1,4 @@
-import "./styles.css";
+import "./styles/main.scss";
 import NeckView from "./neck-view";
 import ScoreView from "./score-view";
 import GameController from "./game-controller";
