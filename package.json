@@ -1,7 +1,7 @@
 {
   "name": "learn-the-fretboard-game",
   "version": "1.0.0",
-  "description": "Simple Parcel Sandbox",
+  "description": "Fretboard Game is a free online browser game to help you learn the guitar fretboard.",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
