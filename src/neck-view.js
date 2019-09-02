@@ -1,4 +1,21 @@
 const neckView = (element, model, scoreAnswer) => {
+  const noteLabelFor = note => {
+    const noteLabel = document.createElement("span");
+    noteLabel.textContent = note;
+
+    noteLabel.addEventListener(
+      "animationend",
+      () => {
+        noteLabel.remove();
+      },
+      true
+    );
+
+    noteLabel.classList.add("neck__note", "fadeOutUp", "animated");
+
+    return noteLabel;
+  };
+
   const update = () => {
     const html = `<div class="neck">
     <div class="neck__fret">
@@ -76,23 +93,10 @@ const neckView = (element, model, scoreAnswer) => {
     buttons.forEach(button =>
       button.addEventListener("click", event => {
         const note = button.getAttribute("data-note");
-        const noteLabel = document.createElement("span");
-        noteLabel.textContent = note;
-
-        noteLabel.addEventListener(
-          "animationend",
-          () => {
-            noteLabel.remove();
-          },
-          true
-        );
-
-        noteLabel.classList.add("neck__note", "fadeOutUp", "animated");
-
-        button.appendChild(noteLabel);
-
         const answer = event.target.getAttribute("data-note");
         const octave = event.target.getAttribute("data-octave");
+
+        button.appendChild(noteLabelFor(note));
 
         scoreAnswer(answer, octave);
       })
