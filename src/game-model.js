@@ -1,7 +1,4 @@
-import Observable from "./observable";
-
-const GameModel = randomNumber => {
-  const observable = Observable();
+const GameModel = (randomNumber, observable) => {
   const notes = ["C", "C#", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
   let correctAnswers = 0;
   let incorrectAnswers = 0;
