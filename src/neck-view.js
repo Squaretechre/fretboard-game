@@ -39,45 +39,69 @@ const neckView = (element, model, scoreAnswer) => {
         <p>E</p>
       </div>
     </div>
-      ${model
+      ${model.frets
         .map(
           (fret, index) => `
           <div class="neck__fret">
             <div class="neck__string">${index + 1}</div>
             <div class="neck__string">
               <button
-                data-note="${fret[0].note}"
-                data-octave="${fret[0].octave}" class="neck__button">
+                data-note="${fret[0].name}"
+                data-octave="${fret[0].octave}"
+                data-string="${fret[0].string}"
+                class="neck__button ${
+                  fret[0].visible ? "" : "neck__button--hidden"
+                }">
               </button>
             </div>
             <div class="neck__string">
               <button
-                data-note="${fret[1].note}"
-                data-octave="${fret[1].octave}" class="neck__button">
+                data-note="${fret[1].name}"
+                data-octave="${fret[1].octave}"
+                data-string="${fret[1].string}"             
+                class="neck__button ${
+                  fret[1].visible ? "" : "neck__button--hidden"
+                }">
               </button>
             </div>
             <div class="neck__string">
               <button
-                data-note="${fret[2].note}"
-                data-octave="${fret[2].octave}" class="neck__button">
+                data-note="${fret[2].name}"
+                data-octave="${fret[2].octave}"
+                data-string="${fret[2].string}"
+                class="neck__button ${
+                  fret[2].visible ? "" : "neck__button--hidden"
+                }">
               </button>
             </div>
             <div class="neck__string">
               <button
-                data-note="${fret[3].note}"
-                data-octave="${fret[3].octave}" class="neck__button">
+                data-note="${fret[3].name}"
+                data-octave="${fret[3].octave}"
+                data-string="${fret[3].string}"
+                class="neck__button ${
+                  fret[3].visible ? "" : "neck__button--hidden"
+                }">
               </button>
             </div>
             <div class="neck__string">
               <button
-                data-note="${fret[4].note}"
-                data-octave="${fret[4].octave}" class="neck__button">
+                data-note="${fret[4].name}"
+                data-octave="${fret[4].octave}"
+                data-string="${fret[4].string}"
+                class="neck__button ${
+                  fret[4].visible ? "" : "neck__button--hidden"
+                }">
               </button>
             </div>
             <div class="neck__string">
               <button
-                data-note="${fret[5].note}"
-                data-octave="${fret[5].octave}" class="neck__button">
+                data-note="${fret[5].name}"
+                data-octave="${fret[5].octave}"
+                data-string="${fret[5].string}"
+                class="neck__button ${
+                  fret[5].visible ? "" : "neck__button--hidden"
+                }">
               </button>
             </div>
         </div>
@@ -92,13 +116,13 @@ const neckView = (element, model, scoreAnswer) => {
 
     buttons.forEach(button =>
       button.addEventListener("click", event => {
-        const note = button.getAttribute("data-note");
-        const answer = event.target.getAttribute("data-note");
+        const note = event.target.getAttribute("data-note");
         const octave = event.target.getAttribute("data-octave");
+        const string = event.target.getAttribute("data-string");
 
         button.appendChild(noteLabelFor(note));
 
-        scoreAnswer(answer, octave);
+        scoreAnswer(note, octave, string);
       })
     );
   };

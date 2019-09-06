@@ -1,11 +1,11 @@
 import Tone from "tone";
 
-const GameController = model => {
+const GameController = gameModel => {
   const synth = new Tone.Synth().toMaster();
 
-  const scoreAnswer = (answer, octave) => {
-    synth.triggerAttackRelease(octave, "16n");
-    model.scoreAnswer(answer);
+  const scoreAnswer = (note, octave, string) => {
+    synth.triggerAttackRelease(`${note}${octave}`, "16n");
+    gameModel.scoreAnswer(note);
   };
 
   return {

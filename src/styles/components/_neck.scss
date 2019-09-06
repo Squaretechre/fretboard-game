@@ -36,6 +36,10 @@
   }
 }
 
+.neck__button--hidden {
+  display: none;
+}
+
 .neck__button:hover {
   background-color: $color-neck-button-dark;
 }

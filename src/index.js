@@ -11,7 +11,7 @@ const neckElement = document.getElementById("neck-view");
 const scoreElement = document.getElementById("score-view");
 
 const gameModel = GameModel(randomNumber, Observable());
-const gameController = GameController(gameModel);
+const gameController = GameController(gameModel, neckModel);
 
 new ScoreView(gameModel, scoreElement);
 const neckView = NeckView(neckElement, neckModel, gameController.scoreAnswer);
