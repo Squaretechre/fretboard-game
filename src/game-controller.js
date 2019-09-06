@@ -5,7 +5,7 @@ const GameController = gameModel => {
 
   const scoreAnswer = (note, octave, string) => {
     synth.triggerAttackRelease(`${note}${octave}`, "16n");
-    gameModel.scoreAnswer(note);
+    gameModel.scoreAnswer(note, string);
   };
 
   return {

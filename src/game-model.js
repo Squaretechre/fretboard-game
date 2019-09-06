@@ -1,4 +1,4 @@
-const GameModel = (randomNumber, observable) => {
+const GameModel = (neck, randomNumber, observable) => {
   const notes = ["C", "C#", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
   let correctAnswers = 0;
   let incorrectAnswers = 0;
@@ -12,9 +12,14 @@ const GameModel = (randomNumber, observable) => {
     observable.addObserver(observer);
   };
 
-  const scoreAnswer = answer => {
-    if (answer === currentNoteBeingGuessed) correctAnswers += 1;
-    if (answer !== currentNoteBeingGuessed) incorrectAnswers += 1;
+  const scoreAnswer = (note, string) => {
+    if (note === currentNoteBeingGuessed) correctAnswers += 1;
+
+    if (note !== currentNoteBeingGuessed) {
+      incorrectAnswers += 1;
+      neck.registerIncorrectAnswerFor(note, string);
+    }
+
     currentNoteBeingGuessed = randomNote();
     observable.notify();
   };
