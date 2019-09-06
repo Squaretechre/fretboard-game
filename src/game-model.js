@@ -1,6 +1,6 @@
 import Observable from "./observable";
 
-const GameModel = () => {
+const GameModel = randomNumber => {
   const observable = Observable();
   const notes = ["C", "C#", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
   let correctAnswers = 0;
@@ -22,10 +22,9 @@ const GameModel = () => {
     observable.notify();
   };
 
-  const randomNote = () => notes[randomIndex()];
-
-  const randomIndex = () => {
-    return Math.floor(Math.random() * Math.floor(notes.length - 1));
+  const randomNote = () => {
+    const randomNoteIndex = randomNumber(notes.length - 1);
+    return notes[randomNoteIndex];
   };
 
   return {
