@@ -83,7 +83,7 @@ function NeckView(element, model, scoreAnswer) {
       button.addEventListener("click", event => {
         const note = event.target.getAttribute("data-note");
         const octave = event.target.getAttribute("data-octave");
-        const string = event.target.getAttribute("data-string");
+        const string = Number(event.target.getAttribute("data-string"));
 
         button.appendChild(noteLabelFor(note));
 

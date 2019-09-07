@@ -1,31 +1,6 @@
-const neckModel = observable => {
-  const note = (name, octave, string, fret) => {
-    const visible = true;
-    let incorrectAnswers = 0;
-    let lastGuessedIncorrectly = false;
+import note from "./note-model"
 
-    const addIncorrectAnswer = () => {
-      incorrectAnswers += 1;
-      lastGuessedIncorrectly = true;
-    };
-
-    const resetLastGuessedIncorrectly = () => {
-      lastGuessedIncorrectly = false;
-    };
-
-    return {
-      name,
-      octave,
-      string,
-      fret,
-      visible,
-      incorrectAnswers: () => incorrectAnswers,
-      addIncorrectAnswer,
-      lastGuessedIncorrectly: () => lastGuessedIncorrectly,
-      resetLastGuessedIncorrectly
-    };
-  };
-
+const neckModel = (randomNumber, observable) => {
   const neck = [
     note("F", 2, 6, 1),
     note("A#", 2, 5, 1),
@@ -112,6 +87,8 @@ const neckModel = observable => {
     note("E", 5, 1, 12)
   ];
 
+  const random = randomNumber(neck.length - 1)
+
   const frets = () => {
     return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(fret =>
       neck.filter(notes => notes.fret === fret)
@@ -132,10 +109,16 @@ const neckModel = observable => {
     observable.notify();
   };
 
+  const randomNote = () => {
+    const randomNoteIndex = random.next();
+    return neck[randomNoteIndex];
+  };
+
   return {
     frets: frets(),
     addObserver,
-    registerIncorrectAnswerFor
+    registerIncorrectAnswerFor,
+    randomNote
   };
 };
 

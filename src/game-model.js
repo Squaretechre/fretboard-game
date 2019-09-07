@@ -1,8 +1,7 @@
-const GameModel = (neck, randomNumber, observable) => {
-  const notes = ["C", "C#", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+const GameModel = (neck, observable) => {
   let correctAnswers = 0;
   let incorrectAnswers = 0;
-  let currentNoteBeingGuessed = "C";
+  let currentNoteBeingGuessed = neck.randomNote();
 
   const initialise = () => {
     observable.notify();
@@ -12,21 +11,27 @@ const GameModel = (neck, randomNumber, observable) => {
     observable.addObserver(observer);
   };
 
-  const scoreAnswer = (note, string) => {
-    if (note === currentNoteBeingGuessed) correctAnswers += 1;
-
-    if (note !== currentNoteBeingGuessed) {
-      incorrectAnswers += 1;
-      neck.registerIncorrectAnswerFor(note, string);
-    }
-
-    currentNoteBeingGuessed = randomNote();
-    observable.notify();
+  const handleCorrectAnswer = note => {
+    if (currentNoteBeingGuessed.hasSameNameAs(note)) correctAnswers += 1;
   };
 
-  const randomNote = () => {
-    const randomNoteIndex = randomNumber(notes.length - 1);
-    return notes[randomNoteIndex];
+  const handleIncorrectAnswer = (note, string) => {
+    if (currentNoteBeingGuessed.hasSameNameAs(note)) return;
+    
+    incorrectAnswers += 1;
+    neck.registerIncorrectAnswerFor(note, string);
+  };
+
+  const setNextNoteToBeGuessed = () => {
+    currentNoteBeingGuessed = neck.randomNote();
+  };
+
+  const scoreAnswer = (note, string) => {
+    handleCorrectAnswer(note);
+    handleIncorrectAnswer(note, string);
+    setNextNoteToBeGuessed();
+
+    observable.notify();
   };
 
   return {

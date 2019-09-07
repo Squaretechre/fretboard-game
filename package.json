@@ -8,11 +8,16 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "jest": "24.9.0",
+    "jest-environment-jsdom-fourteen": "0.1.0",
     "tone": "13.8.25"
   },
   "devDependencies": {
     "@babel/core": "7.2.0",
     "parcel-bundler": "^1.6.1"
   },
-  "keywords": []
+  "keywords": [],
+  "jest": {
+    "testEnvironment": "jest-environment-jsdom-fourteen"
+  }
 }
