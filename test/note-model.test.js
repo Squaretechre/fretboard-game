@@ -1,7 +1,7 @@
 import note from "../src/note-model"
 
 describe("note model", () => {
-  it("increments incorrect score count by 1 and sets note as being last incorrectly guessed note when incorrect score count is incremeneted", () => {
+  it("increments incorrect score count by 1 and sets note as being the last incorrectly guessed note when incorrect score count is incremented", () => {
     const aNote = note("C", 4, 4, 10)
 
     expect(aNote.incorrectAnswers()).toBe(0)

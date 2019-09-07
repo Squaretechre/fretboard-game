@@ -94,7 +94,7 @@ describe("game model", () => {
     expect(gameModel.incorrectAnswers()).toBe(3);
   });
 
-  it("updates the neck with an incorrect guess for a the note on the string it was guessed on when note is answered incorrectly", () => {
+  it("updates the neck with an incorrect guess for a note on the string it was guessed on when note is answered incorrectly", () => {
     const mockNeckModel = {
       randomNote: jest
         .fn()
