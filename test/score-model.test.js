@@ -1,6 +1,6 @@
-import GameModel from "../src/game-model";
-import Observable from "../src/observable";
-import note from "../src/note-model";
+import ScoreModel from "../src/components/score/score-model";
+import Observable from "../src/lib/observable";
+import note from "../src/components/neck/note-model";
 
 describe("game model", () => {
   const mockNeckModel = {
@@ -15,7 +15,7 @@ describe("game model", () => {
   };
 
   it("notifies observers when initialised", () => {
-    const gameModel = GameModel(mockNeckModel, Observable());
+    const gameModel = ScoreModel(mockNeckModel, Observable());
 
     gameModel.addObserver(mockObserver);
     gameModel.initialise()
@@ -24,7 +24,7 @@ describe("game model", () => {
   });
 
   it("notifies observers of state change when an answer is scored", () => {
-    const gameModel = GameModel(mockNeckModel, Observable());
+    const gameModel = ScoreModel(mockNeckModel, Observable());
 
     gameModel.addObserver(mockObserver);
     gameModel.scoreAnswer("C", 6);
@@ -33,12 +33,12 @@ describe("game model", () => {
   });
 
   it("is initialised with a correct answers score of 0", () => {
-    const gameModel = GameModel(mockNeckModel, Observable());
+    const gameModel = ScoreModel(mockNeckModel, Observable());
     expect(gameModel.correctAnswers()).toBe(0);
   });
 
   it("is initialised with a incorrect answers score of 0", () => {
-    const gameModel = GameModel(mockNeckModel, Observable());
+    const gameModel = ScoreModel(mockNeckModel, Observable());
     expect(gameModel.incorrectAnswers()).toBe(0);
   });
 
@@ -51,7 +51,7 @@ describe("game model", () => {
       registerIncorrectAnswerFor: jest.fn()
     };
 
-    const gameModel = GameModel(mockNeckModel, Observable());
+    const gameModel = ScoreModel(mockNeckModel, Observable());
 
     expect(gameModel.currentNoteBeingGuessed()).toBe(aRandomNote);
   });
@@ -67,7 +67,7 @@ describe("game model", () => {
     
     const dummyString = 1;
 
-    const gameModel = GameModel(mockNeckModel, Observable());
+    const gameModel = ScoreModel(mockNeckModel, Observable());
     gameModel.scoreAnswer("C", dummyString)
     gameModel.scoreAnswer("A#", dummyString)
 
@@ -86,7 +86,7 @@ describe("game model", () => {
     
     const dummyString = 1;
 
-    const gameModel = GameModel(mockNeckModel, Observable());
+    const gameModel = ScoreModel(mockNeckModel, Observable());
     gameModel.scoreAnswer("C", dummyString)
     gameModel.scoreAnswer("C#", dummyString)
     gameModel.scoreAnswer("D", dummyString)
@@ -103,7 +103,7 @@ describe("game model", () => {
       registerIncorrectAnswerFor: jest.fn()
     };
 
-    const gameModel = GameModel(mockNeckModel, Observable());
+    const gameModel = ScoreModel(mockNeckModel, Observable());
     gameModel.scoreAnswer("F", 6)
     gameModel.scoreAnswer("D", 9)
 

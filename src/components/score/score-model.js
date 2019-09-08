@@ -1,4 +1,4 @@
-const GameModel = (neck, observable) => {
+const ScoreModel = (neck, observable) => {
   let correctAnswers = 0;
   let incorrectAnswers = 0;
   let currentNoteBeingGuessed = neck.randomNote();
@@ -17,7 +17,7 @@ const GameModel = (neck, observable) => {
 
   const handleIncorrectAnswer = (note, string) => {
     if (currentNoteBeingGuessed.hasSameNameAs(note)) return;
-    
+
     incorrectAnswers += 1;
     neck.registerIncorrectAnswerFor(note, string);
   };
@@ -44,4 +44,4 @@ const GameModel = (neck, observable) => {
   };
 };
 
-export default GameModel;
+export default ScoreModel;

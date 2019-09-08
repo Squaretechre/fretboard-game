@@ -1,4 +1,4 @@
-import note from "../src/note-model"
+import note from "../src/components/neck/note-model"
 
 describe("note model", () => {
   it("increments incorrect score count by 1 and sets note as being the last incorrectly guessed note when incorrect score count is incremented", () => {

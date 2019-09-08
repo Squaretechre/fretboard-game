@@ -1,10 +1,16 @@
 $color-white: #fff;
+$color-red: #fe676e;
+$color-tan: #ffdca2;
+$color-green: #94b447;
+$color-purple: #8b4c70;
 
-$color-correct: green;
-$color-incorrect: red;
+$color-correct: $color-green;
+$color-incorrect: $color-red;
 
 $color-fret-metal: #ddd;
-$color-neck-button: #ffdca2;
-$color-neck-button-dark: darken(#ffdca2, 20);
-$color-neck-button-warn: #fe676e;
-$color-neck-button-warn-dark: darken(#fe676e, 20);
+$color-neck-button: $color-tan;
+$color-neck-button-dark: darken($color-neck-button, 20);
+$color-neck-button-warn: $color-red;
+$color-neck-button-warn-dark: darken($color-neck-button-warn, 20);
+
+$color-menu-background: $color-purple;

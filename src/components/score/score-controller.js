@@ -1,7 +1,7 @@
-const GameController = (gameModel, synth) => {
+const ScoreController = (scoreModel, synth) => {
   const scoreAnswer = (note, octave, string) => {
     synth.triggerAttackRelease(`${note}${octave}`, "16n");
-    gameModel.scoreAnswer(note, string);
+    scoreModel.scoreAnswer(note, string);
   };
 
   return {
@@ -9,4 +9,4 @@ const GameController = (gameModel, synth) => {
   };
 };
 
-export default GameController;
+export default ScoreController;

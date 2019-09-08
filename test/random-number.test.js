@@ -1,4 +1,4 @@
-import randomNumber from "../src/random-number";
+import randomNumber from "../src/lib/random-number";
 
 describe("random number", () => {
   it("should never generate the same number twice in a row", () => {
