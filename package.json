@@ -5,19 +5,27 @@
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "test": "jest"
   },
   "dependencies": {
-    "jest": "24.9.0",
-    "jest-environment-jsdom-fourteen": "0.1.0",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^25.2.3",
+    "jest": "25.2.3",
+    "jest-environment-jsdom-sixteen": "1.0.3",
+    "regenerator-runtime": "^0.13.5",
     "tone": "13.8.25"
   },
   "devDependencies": {
-    "@babel/core": "7.2.0",
-    "parcel-bundler": "^1.6.1"
+    "parcel-bundler": "^1.6.1",
+    "sass": "^1.26.3"
   },
   "keywords": [],
   "jest": {
-    "testEnvironment": "jest-environment-jsdom-fourteen"
+    "testEnvironment": "jest-environment-jsdom-sixteen",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }
