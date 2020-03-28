@@ -10,7 +10,7 @@ import ScoreModel from "./components/score/score-model";
 import randomNumber from "./lib/random-number";
 import Observable from "./lib/observable";
 
-export const initialise = synth => {
+export const initialiseApplication = synth => {
   const neckElement = document.getElementById("neck-view");
   const scoreElement = document.getElementById("score-view");
   const settingsElement = document.getElementById("settings-view");

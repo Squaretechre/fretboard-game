@@ -1,92 +1,62 @@
-import {initialise} from '../src/app';
-import fs from 'fs';
+import {initialiseApplication} from '../src/app'
+import DomTestSupport from './support/dom-test-support'
+import ScoreViewTestSupport from "./support/score-view-test-support"
+import NeckViewTestSupport from "./support/neck-view-test-support"
+import fs from 'fs'
 
 describe('app', () => {
+  let dom
+  let scoreView
+  let neckView
+
   beforeEach(() => {
-    const contents = fs.readFileSync('./index.html', 'utf8');
-    document.body.innerHTML = contents;
+    document.body.innerHTML = fs.readFileSync('./index.html', 'utf8')
     const dummySynth = {
       triggerAttackRelease: () => {}
-    };
+    }
 
-    initialise(dummySynth);
-  });
+    initialiseApplication(dummySynth)
+
+    dom = DomTestSupport(document)
+    scoreView = ScoreViewTestSupport(document)
+    neckView = NeckViewTestSupport(document)
+  })
 
   it('is initialised with correct answer score of 0', () => {
-    const correctAnswers = document.querySelectorAll(
-      "[data-test-id='correct-answers']"
-    )[0];
-
-    expect(correctAnswers.textContent).toEqual('0');
-  });
+    expect(scoreView.correctAnswersText()).toEqual('0')
+  })
 
   it('is initialised with an incorrect answer score of 0', () => {
-    const correctAnswers = document.querySelectorAll(
-      "[data-test-id='incorrect-answers']"
-    )[0];
-
-    expect(correctAnswers.textContent).toEqual('0');
-  });
+    expect(scoreView.incorrectAnswersText()).toEqual('0')
+  })
 
   it('increments correct score count by 1 when correct note is guessed', () => {
-    const currentNote = document.querySelectorAll(
-      "[data-test-id='current-note']"
-    )[0].textContent;
-
-    const buttonsRepresentingCurrentNote = document.querySelectorAll(
-      `[data-note="${currentNote}"]`
-    );
+    const currentNote = scoreView.currentNoteText()
+    const buttonsRepresentingCurrentNote = neckView.allNoteButtonsByNote(currentNote)
 
     const aRandomButtonRepresentingCurrentNote =
       buttonsRepresentingCurrentNote[
         Math.floor(Math.random() * buttonsRepresentingCurrentNote.length)
-      ];
+      ]
 
-    const clickEvent = new window.MouseEvent('click', {button: 0});
+    dom.click(aRandomButtonRepresentingCurrentNote)
 
-    aRandomButtonRepresentingCurrentNote.dispatchEvent(clickEvent);
-
-    const correctAnswers = document.querySelectorAll(
-      "[data-test-id='correct-answers']"
-    )[0];
-
-    const incorrectAnswers = document.querySelectorAll(
-      "[data-test-id='incorrect-answers']"
-    )[0];
-
-    expect(incorrectAnswers.textContent).toEqual('0');
-    expect(correctAnswers.textContent).toEqual('1');
-  });
+    expect(scoreView.incorrectAnswersText()).toEqual('0')
+    expect(scoreView.correctAnswersText()).toEqual('1')
+  })
 
   it('increments incorrect score count by 1 when incorrect note is guessed', () => {
-    const currentNote = document.querySelectorAll(
-      "[data-test-id='current-note']"
-    )[0].textContent;
-
-    const allNoteButtons = document.querySelectorAll('[data-note]');
-
-    const allButtonsNotRepresentingCurrentNote = Array.from(
-      allNoteButtons
-    ).filter(button => button.getAttribute('data-note') !== currentNote);
+    const currentNote = scoreView.currentNoteText()
+    const allButtonsNotRepresentingCurrentNote = neckView.allNoteButtonsNotRepresentingNote(currentNote)
 
     const aRandomButtonNotRepresentingCurrentNote =
       allButtonsNotRepresentingCurrentNote[
         Math.floor(Math.random() * allButtonsNotRepresentingCurrentNote.length)
-      ];
+      ]
 
-    const clickEvent = new window.MouseEvent('click', {button: 0});
+    dom.click(aRandomButtonNotRepresentingCurrentNote)
 
-    aRandomButtonNotRepresentingCurrentNote.dispatchEvent(clickEvent);
-
-    const correctAnswers = document.querySelectorAll(
-      "[data-test-id='correct-answers']"
-    )[0];
-
-    const incorrectAnswers = document.querySelectorAll(
-      "[data-test-id='incorrect-answers']"
-    )[0];
-
-    expect(incorrectAnswers.textContent).toEqual('1');
-    expect(correctAnswers.textContent).toEqual('0');
-  });
-});
+    expect(scoreView.incorrectAnswersText()).toEqual('1')
+    expect(scoreView.correctAnswersText()).toEqual('0')
+  })
+})
